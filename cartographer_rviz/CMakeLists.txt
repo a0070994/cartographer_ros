@@ -36,6 +36,7 @@ option(BUILD_GRPC "build features that require Cartographer gRPC support" false)
 google_initialize_cartographer_project()
 
 find_package(absl REQUIRED)
+find_package(Boost COMPONENTS iostreams)
 find_package(cartographer_ros REQUIRED)
 find_package(cartographer_ros_msgs REQUIRED)
 find_package(Eigen3 REQUIRED)
