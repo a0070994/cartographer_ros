@@ -87,6 +87,21 @@ add_library(${PROJECT_NAME} SHARED
   src/metrics/internal/family.cpp
   src/metrics/internal/histogram.cpp
 )
+
+add_library(cartographer_ros_flags
+  src/cartographer_ros_flags.cc
+)
+
+target_include_directories(cartographer_ros_flags PUBLIC
+  "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>"
+  "$<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}/include>"
+  "$<INSTALL_INTERFACE:include/${PROJECT_NAME}>"
+)
+target_link_libraries(cartographer_ros_flags
+  gflags
+)
+
+
 target_include_directories(${PROJECT_NAME} PUBLIC
   "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>"
   "$<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}/include>"
@@ -128,6 +143,7 @@ target_link_libraries(${PROJECT_NAME} PRIVATE
   tf2_eigen::tf2_eigen
   ${tf2_msgs_TARGETS}
   urdf::urdf
+  cartographer_ros_flags
 )
 
 # Executables
