@@ -21,6 +21,7 @@
 #include <vector>
 
 #include "absl/synchronization/mutex.h"
+#include "cartographer/common/thread_annotations.h"
 #include "cartographer/metrics/histogram.h"
 #include "cartographer_ros_msgs/msg/metric.hpp"
 

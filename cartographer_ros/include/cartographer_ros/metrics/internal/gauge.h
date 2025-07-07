@@ -21,6 +21,7 @@
 #include <string>
 
 #include "absl/synchronization/mutex.h"
+#include "cartographer/common/thread_annotations.h"
 #include "cartographer/metrics/gauge.h"
 #include "cartographer_ros_msgs/msg/metric.hpp"
 

@@ -23,6 +23,7 @@
 #include "absl/synchronization/mutex.h"
 #include "cairo/cairo.h"
 #include "cartographer/common/port.h"
+#include "cartographer/common/thread_annotations.h"
 #include "cartographer/io/image.h"
 #include "cartographer/io/submap_painter.h"
 #include "cartographer/mapping/id.h"

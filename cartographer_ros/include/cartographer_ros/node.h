@@ -26,6 +26,7 @@
 
 #include "absl/synchronization/mutex.h"
 #include "cartographer/common/fixed_ratio_sampler.h"
+#include "cartographer/common/thread_annotations.h"
 #include "cartographer/mapping/map_builder_interface.h"
 #include "cartographer/mapping/pose_extrapolator.h"
 #include "cartographer_ros/map_builder_bridge.h"
