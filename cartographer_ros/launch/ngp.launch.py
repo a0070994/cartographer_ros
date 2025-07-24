@@ -27,25 +27,12 @@ import os
 def generate_launch_description():
 
     ## ***** Launch arguments *****
-    use_sim_time_arg = DeclareLaunchArgument('use_sim_time', default_value = 'False')
+    use_sim_time_arg = DeclareLaunchArgument('use_sim_time', default_value = 'True')
 
     ## ***** File paths ******
     pkg_share = FindPackageShare('cartographer_ros').find('cartographer_ros')
-    urdf_dir = os.path.join(pkg_share, 'urdf')
-    urdf_file = os.path.join(urdf_dir, 'ngp.urdf')
-    with open(urdf_file, 'r') as infp:
-        robot_desc = infp.read()
 
     ## ***** Nodes *****
-    robot_state_publisher_node = Node(
-        package = 'robot_state_publisher',
-        executable = 'robot_state_publisher',
-        parameters=[
-            {'robot_description': robot_desc},
-            {'use_sim_time': LaunchConfiguration('use_sim_time')}],
-        output = 'screen'
-        )
-
     cartographer_node = Node(
         package = 'cartographer_ros',
         executable = 'cartographer_node',
@@ -53,8 +40,7 @@ def generate_launch_description():
         arguments = [
             '-configuration_directory', FindPackageShare('cartographer_ros').find('cartographer_ros') + '/configuration_files',
             '-configuration_basename', 'backpack_2d_ngp.lua'],
-        remappings = [
-            ('echoes', 'horizontal_laser_2d')],
+        remappings = [('scan', 'navigation_lidar_scan')],
         output = 'screen'
         )
 
@@ -69,7 +55,6 @@ def generate_launch_description():
     return LaunchDescription([
         use_sim_time_arg,
         # Nodes
-        robot_state_publisher_node,
         cartographer_node,
         cartographer_occupancy_grid_node,
     ])
