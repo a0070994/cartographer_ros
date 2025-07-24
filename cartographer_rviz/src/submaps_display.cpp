@@ -20,6 +20,7 @@
 #include "absl/memory/memory.h"
 #include "absl/synchronization/mutex.h"
 
+#include "cartographer/common/thread_annotations.h"
 #include "cartographer/mapping/id.h"
 #include "cartographer_ros_msgs/msg/submap_list.hpp"
 #include "cartographer_ros_msgs/srv/submap_query.hpp"

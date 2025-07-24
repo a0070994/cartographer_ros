@@ -25,6 +25,7 @@
 #include "Eigen/Geometry"
 #include "absl/memory/memory.h"
 #include "cartographer/common/port.h"
+#include "cartographer/common/thread_annotations.h"
 #include "cartographer_ros/msg_conversion.h"
 #include "cartographer_ros_msgs/srv/submap_query.hpp"
 #include <rclcpp/rclcpp.hpp>

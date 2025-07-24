@@ -35,6 +35,7 @@
 #include <rclcpp/rclcpp.hpp>
 #include <rviz_common/display_context.hpp>
 #include <rviz_common/frame_manager_iface.hpp>
+#include "cartographer/common/thread_annotations.h"
 #include "rviz_rendering/objects/axes.hpp"
 #include "rviz_rendering/objects/movable_text.hpp"
 #include <rviz_common/properties/bool_property.hpp>
