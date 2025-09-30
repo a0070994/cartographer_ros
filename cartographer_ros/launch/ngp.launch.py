@@ -60,6 +60,10 @@ def generate_launch_description():
 
     return LaunchDescription([
         use_sim_time_arg,
+        scan_topic_arg,
+        pcd_topic_arg,
+        odom_topic_arg,
+        resoltion_arg,
         load_state_filename_arg,
         config_basename_arg,
         config_directory_arg,
