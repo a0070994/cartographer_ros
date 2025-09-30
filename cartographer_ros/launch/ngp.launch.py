@@ -8,6 +8,10 @@ from launch_ros.substitutions import FindPackageShare
 def generate_launch_description():
     ## ***** Launch arguments *****
     use_sim_time_arg = DeclareLaunchArgument('use_sim_time', default_value='True')
+    scan_topic_arg = DeclareLaunchArgument('scan_topic', default_value='scan')
+    pcd_topic_arg = DeclareLaunchArgument('pcd_topic', default_value='points2')
+    odom_topic_arg = DeclareLaunchArgument('odom_topic', default_value='odom')
+    resoltion_arg = DeclareLaunchArgument('resolution', default_value='0.05')
     load_state_filename_arg = DeclareLaunchArgument('load_state_filename', default_value='')
     config_basename_arg = DeclareLaunchArgument('configuration_basename', default_value='backpack_2d_ngp.lua')
     config_directory_arg = DeclareLaunchArgument(
@@ -18,6 +22,10 @@ def generate_launch_description():
 
     ## ***** Launch configurations *****
     use_sim_time = LaunchConfiguration('use_sim_time')
+    scan_topic = LaunchConfiguration('scan_topic')
+    pcd_topic = LaunchConfiguration('pcd_topic')
+    odom_topic = LaunchConfiguration('odom_topic')
+    resolution = LaunchConfiguration('resolution')
     config_basename = LaunchConfiguration('configuration_basename')
     config_directory = LaunchConfiguration('configuration_directory')
     load_state_filename = LaunchConfiguration('load_state_filename')
@@ -32,7 +40,11 @@ def generate_launch_description():
             '-configuration_basename', config_basename,
             '--load_state_filename', load_state_filename
         ],
-        remappings=[('scan', 'navigation_lidar_scan')],
+        remappings=[
+            ('scan', scan_topic), 
+            ('points2', pcd_topic),
+            ('odom', odom_topic)
+            ],
         output='screen'
     )
 
@@ -41,7 +53,7 @@ def generate_launch_description():
         executable='cartographer_occupancy_grid_node',
         parameters=[
             {'use_sim_time': use_sim_time},
-            {'resolution': 0.05}
+            {'resolution': resolution}
         ],
         output='screen'
     )
