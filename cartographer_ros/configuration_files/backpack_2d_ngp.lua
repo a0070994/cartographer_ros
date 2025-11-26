@@ -49,19 +49,19 @@ MAP_BUILDER.use_trajectory_builder_2d = true
 MAP_BUILDER.num_background_threads = 4                                                            -- default 4
 TRAJECTORY_BUILDER_2D.use_imu_data = false
 TRAJECTORY_BUILDER_2D.num_accumulated_range_data = 1
-TRAJECTORY_BUILDER_2D.min_range = 1                                                               -- default 0.
-TRAJECTORY_BUILDER_2D.max_range = 25                                                              -- default 30.   (maximum usable range for the lidar)
+TRAJECTORY_BUILDER_2D.min_range = 1.0                                                             -- default 0.    (avoid ground clutter)
+TRAJECTORY_BUILDER_2D.max_range = 35.0                                                            -- default 30.   (optimal for 10cm mapping with E1R)
 TRAJECTORY_BUILDER_2D.min_z = 0.0
 TRAJECTORY_BUILDER_2D.max_z = 3.0
 TRAJECTORY_BUILDER_2D.use_online_correlative_scan_matching = true                                 -- default false
-TRAJECTORY_BUILDER_2D.adaptive_voxel_filter.min_num_points = 190                                  -- default 200
-TRAJECTORY_BUILDER_2D.adaptive_voxel_filter.max_range = 40.                                       -- default 50.
+TRAJECTORY_BUILDER_2D.adaptive_voxel_filter.min_num_points = 150                                  -- default 200   (reduced for sparser far-range data)
+TRAJECTORY_BUILDER_2D.adaptive_voxel_filter.max_range = 35.0                                      -- default 50.   (MUST match max_range above!)
 TRAJECTORY_BUILDER_2D.adaptive_voxel_filter.max_length = 0.5                                      -- default 0.5
-TRAJECTORY_BUILDER_2D.voxel_filter_size = 0.030                                                   -- default 0.025 (successfully tested with 0.025)
+TRAJECTORY_BUILDER_2D.voxel_filter_size = 0.050                                                   -- default 0.025 (increased for 10cm resolution - half of grid size)
 TRAJECTORY_BUILDER_2D.ceres_scan_matcher.translation_weight = 10.                                 -- default 10.
 TRAJECTORY_BUILDER_2D.ceres_scan_matcher.rotation_weight = 20.                                    -- default 40.   (require a higher matching score to rotate (yet somewhat loose))
 TRAJECTORY_BUILDER_2D.submaps.num_range_data = 90                                                 -- default 90    (number of range data before adding a new submap -> submap size)
-TRAJECTORY_BUILDER_2D.submaps.grid_options_2d.resolution = 0.05                                   -- default 0.05  (will be overwritten by GridMapCartographer Module)
+TRAJECTORY_BUILDER_2D.submaps.grid_options_2d.resolution = 0.10                                   -- default 0.05  (will be overwritten by GridMapCartographer Module)
 --TRAJECTORY_BUILDER_2D.imu_gravity_time_constant = 1                                             -- default 10.
 --TRAJECTORY_BUILDER_2D.real_time_correlative_scan_matcher.linear_search_window = 0.15            -- default 0.1
 --TRAJECTORY_BUILDER_2D.real_time_correlative_scan_matcher.angular_search_window = math.rad(35.)  -- default math.rad(20.)
@@ -78,7 +78,7 @@ POSE_GRAPH.constraint_builder.fast_correlative_scan_matcher.angular_search_windo
 
 -- Quality of Input Trajectory
 POSE_GRAPH.optimization_problem.odometry_translation_weight = 100                                 -- default 1e5
-POSE_GRAPH.optimization_problem.odometry_rotation_weight = 0.1                                    -- default 1e5
+POSE_GRAPH.optimization_problem.odometry_rotation_weight = 0.01                                    -- default 1e5
 POSE_GRAPH.optimization_problem.fixed_frame_pose_translation_weight = 1e1                         -- default 1e1
 POSE_GRAPH.optimization_problem.fixed_frame_pose_rotation_weight = 1e2                            -- default 1e2
 POSE_GRAPH.max_num_final_iterations = 200                                                         -- default 200
